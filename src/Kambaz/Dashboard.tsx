@@ -10,7 +10,7 @@ export default function Dashboard() {
             to="/Kambaz/Courses/1234/Home"
             className="wd-dashboard-course-link"
           >
-            <img src="/images/reactjs.jpg" width={200} />
+            <img src="src/images/reactjs.jpg" width={200} />
             <div>
               <h5> CS1234 React JS </h5>
               <p className="wd-dashboard-course-title">
