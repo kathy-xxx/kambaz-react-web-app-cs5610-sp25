@@ -1,18 +1,19 @@
-import Labs from './Labs';
-import { HashRouter, Route, Routes, Navigate } from 'react-router';
+import Labs from "./Labs";
+import Kambaz from "./Kambaz";
+import { HashRouter, Route, Routes, Navigate } from "react-router";
 
 function App() {
-
   return (
     <HashRouter>
       <div>
         <Routes>
           <Route path="/" element={<Navigate to="/Labs" />} />
           <Route path="/Labs/*" element={<Labs />} />
+          <Route path="/Kambaz/*" element={<Kambaz />} />
         </Routes>
       </div>
     </HashRouter>
-  )
+  );
 }
 
-export default App
+export default App;
