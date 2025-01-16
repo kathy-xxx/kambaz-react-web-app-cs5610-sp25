@@ -131,7 +131,7 @@ export default function AssignmentEditor() {
         </tbody>
       </table>
 
-      <div>
+      <div style={{ textAlign: "right" }}>
         <button type="button" onClick={() => alert("Assignment Cancelled!")}>
           Cancel
         </button>
