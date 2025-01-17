@@ -56,20 +56,16 @@ export default function Lab1() {
           <li>Serve and enjoy!</li>
         </ol>
         My favorite recipe:
-        <ol id="wd-your-favorite-recipe">
-          <li>Ingredients:</li>
-          <li>1 lb ground beef</li>
-          <li>1 onion, chopped</li>
-          <li>2 cloves garlic, minced</li>
-          <li>1 lb pork shoulder, sliced</li>
-          <li>1 lb ground turkey, sliced</li>
-          <li>1 lb ground pork chop</li>
-          <li>1/2 cup diced tomatoes</li>
-          <li>1/2 cup diced green peppers</li>
-          <li>1/4 cup diced red onions</li>
-          <li>1/4 cup diced carrots</li>
-          <li>1/4 cup diced celery</li>
-          <li>1/4 cup diced bell peppers</li>
+        <ol id="wd-cheesecakes">
+          <li>Add cream cheese and stir.</li>
+          <li>Add sugar and stir again.</li>
+          <li>Add sour cream, vanilla extract, and salt, and stir.</li>
+          <li>Add beaten eggs/</li>
+          <li>Pour cheesecake batter into prepared springform pan.</li>
+          <li>Transfer to the centger rack of oven and bake.</li>
+          <li>Remove from ove and allow cool.</li>
+          <li>Transfer to refrigerator.</li>
+          <li>Serve and enjoy!</li>
         </ol>
         <h5>Unordered List Tag</h5>
         My favorite books (in no particular order)
