@@ -80,6 +80,7 @@ export default function Lab1() {
         <ul id="wd-your-books">
           <li>To Kill a Mockingbird</li>
           <li>1984</li>
+          <li>The Great Gatsby</li>
         </ul>
       </div>
       <div id="wd-tables">
@@ -106,7 +107,54 @@ export default function Lab1() {
               <td>2/10/21</td>
               <td>90</td>
             </tr>
-            <tr> ... </tr>
+            <tr>
+              <td>Q3</td>
+              <td>JavaScript</td>
+              <td>2/17/21</td>
+              <td>95</td>
+            </tr>
+            <tr>
+              <td>Q4</td>
+              <td>React</td>
+              <td>2/24/21</td>
+              <td>88</td>
+            </tr>
+            <tr>
+              <td>Q5</td>
+              <td>Node.js</td>
+              <td>2/31/21</td>
+              <td>92</td>
+            </tr>
+            <tr>
+              <td>Q6</td>
+              <td>Redux</td>
+              <td>3/7/21</td>
+              <td>80</td>
+            </tr>
+            <tr>
+              <td>Q7</td>
+              <td>MongoDB</td>
+              <td>3/14/21</td>
+              <td>85</td>
+            </tr>
+            <tr>
+              <td>Q8</td>
+              <td>Python</td>
+              <td>3/21/21</td>
+              <td>87</td>
+            </tr>
+            <tr>
+              <td>Q9</td>
+              <td>Django</td>
+              <td>3/28/21</td>
+              <td>89</td>
+            </tr>
+            <tr>
+              <td>Q10</td>
+              <td>Machine Learning</td>
+              <td>4/4/21</td>
+              <td>91</td>
+            </tr>
           </tbody>
           <tfoot>
             <tr>
