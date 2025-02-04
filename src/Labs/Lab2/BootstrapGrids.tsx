@@ -2,7 +2,7 @@ import { Col, Row } from "react-bootstrap";
 
 export default function BootstrapGrids() {
   return (
-    <div>
+    <div id="wd-bs-grids">
       <h2>Bootstrap</h2>
       <div id="wd-bs-grid-system">
         <h2>Grid system</h2>
