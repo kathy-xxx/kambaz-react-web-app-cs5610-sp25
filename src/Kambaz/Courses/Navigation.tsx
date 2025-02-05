@@ -17,14 +17,14 @@ export default function CourseNavigation() {
         Modules
       </Link>
       <Link
-        to="/Kambaz/Courses/1234/Piazza"
+        to="https://piazza.com/class/m5h5iqr0wds2l5"
         id="wd-course-piazza-link"
         className="list-group-item text-danger border border-0"
       >
         Piazza
       </Link>
       <Link
-        to="/Kambaz/Courses/1234/Zoom"
+        to="https://applications.zoom.us/lti/rich"
         id="wd-course-zoom-link"
         className="list-group-item text-danger border border-0"
       >
@@ -53,7 +53,7 @@ export default function CourseNavigation() {
         Grades
       </Link>
       <Link
-        to="/Kambaz/People"
+        to="/Kambaz/Courses/:cid/People"
         id="wd-course-people-link"
         className="list-group-item text-danger border border-0"
       >

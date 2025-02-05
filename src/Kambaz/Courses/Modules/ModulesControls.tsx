@@ -52,7 +52,6 @@ export default function ModulesControls() {
       >
         Collapse All
       </Button>
-      {/* Implement the View Progress and Collapse All buttons with IDs wd-view-progress and wd-collapse-all */}
     </div>
   );
 }
