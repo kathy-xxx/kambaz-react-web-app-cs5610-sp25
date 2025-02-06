@@ -9,14 +9,6 @@ export default function Labs() {
       <h1>Labs</h1>
       <TOC />
       <p>Created by: Zixuan Xiao</p>
-      <a
-        id="wd-github"
-        href="https://github.com/kathy-xxx/kambaz-react-web-app-cs5610-sp25.git"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        GitHub Repository
-      </a>
       <Routes>
         <Route path="/" element={<Navigate to="Lab1" />} />
         <Route path="Lab1" element={<Lab1 />} />
