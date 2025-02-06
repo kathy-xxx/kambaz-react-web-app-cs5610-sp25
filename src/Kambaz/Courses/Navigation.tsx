@@ -59,7 +59,6 @@ export default function CourseNavigation() {
       >
         People
       </Link>
-      <br />
     </div>
   );
 }
