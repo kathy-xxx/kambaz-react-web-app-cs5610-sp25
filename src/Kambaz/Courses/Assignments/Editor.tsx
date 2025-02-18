@@ -1,10 +1,17 @@
 import { Form, Button, Row, Col } from "react-bootstrap";
+import { useParams } from "react-router";
+import * as db from "../../Database";
 
 export default function AssignmentEditor() {
+  const { cid, aid } = useParams();
+  const assignments = db.assignments;
+  const assignment = assignments.find(
+    (assignment) => assignment.course === cid && assignment._id === aid
+  );
   return (
     <div id="wd-assignments-editor" className="p-4">
       <Form.Group className="mb-3" controlId="wd-name">
-        <Form.Label>Assignment Name</Form.Label>
+        <Form.Label>{assignment && assignment.title}</Form.Label>
         <Form.Control defaultValue="A1" placeholder="Enter assignment name" />
       </Form.Group>
       <Form.Group className="mb-3" controlId="wd-description">
