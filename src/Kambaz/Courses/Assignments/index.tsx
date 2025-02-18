@@ -7,7 +7,6 @@ import { AiOutlineForm } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router";
 import * as db from "../../Database";
-
 export default function Assignments() {
   const { cid } = useParams();
   const assignments = db.assignments;
