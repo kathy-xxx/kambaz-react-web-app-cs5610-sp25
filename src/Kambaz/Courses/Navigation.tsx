@@ -7,8 +7,8 @@ export default function CourseNavigation() {
     { label: "Modules", path: "/Kambaz/Courses/:cid/Modules" },
     { label: "Piazza", path: "https://piazza.com/class/m5h5iqr0wds2l5" },
     { label: "Zoom", path: "https://applications.zoom.us/lti/rich" },
-    { label: "Assignments", path: "/Kambas/Courses/:cid/assignments" },
-    { label: "Quizzes", path: "/Kambas/Courses/:cid/quizzes" },
+    { label: "Assignments", path: "/Kambas/Courses/:cid/Assignments" },
+    { label: "Quizzes", path: "/Kambas/Courses/:cid/Quizzes" },
     { label: "Grades", path: "/Kambaz/Courses/:cid/Grades" },
     { label: "People", path: "/Kambaz/Courses/:cid/People" },
   ];
