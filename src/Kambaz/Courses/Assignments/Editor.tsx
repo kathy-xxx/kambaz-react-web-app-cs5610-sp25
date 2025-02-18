@@ -1,5 +1,5 @@
 import { Form, Button, Row, Col } from "react-bootstrap";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import * as db from "../../Database";
 
 export default function AssignmentEditor() {
@@ -11,8 +11,11 @@ export default function AssignmentEditor() {
   return (
     <div id="wd-assignments-editor" className="p-4">
       <Form.Group className="mb-3" controlId="wd-name">
-        <Form.Label>{assignment && assignment.title}</Form.Label>
-        <Form.Control defaultValue="A1" placeholder="Enter assignment name" />
+        <Form.Label>Assignment Name</Form.Label>
+        <Form.Control
+          defaultValue={assignment && assignment.title}
+          placeholder="Enter assignment name"
+        />
       </Form.Group>
       <Form.Group className="mb-3" controlId="wd-description">
         <Form.Control
@@ -81,8 +84,6 @@ The Kanbas application should include a link to navigate back to the landing pag
         />
         <Form.Check type="checkbox" id="wd-file-upload" label="File Upload" />
       </Form.Group>
-
-      {/* Assign To */}
       <Form.Group className="mb-3" controlId="wd-assign-to">
         <Form.Label>Assign to</Form.Label>
         <Form.Control defaultValue="Everyone" />
@@ -117,16 +118,21 @@ The Kanbas application should include a link to navigate back to the landing pag
         </Col>
       </Row>
       <div className="d-flex justify-content-end">
-        <Button
-          variant="secondary"
-          className="me-2"
-          onClick={() => alert("Assignment Cancelled!")}
+        <Link
+          to={`/Kambaz/Courses/${cid}/Assignments`}
+          className="wd-dashboard-course-link text-decoration-none text-dark"
         >
-          Cancel
-        </Button>
-        <Button variant="danger" onClick={() => alert("Assignment Saved!")}>
-          Save
-        </Button>
+          <Button
+            variant="secondary"
+            className="me-2"
+            onClick={() => alert("Assignment Cancelled!")}
+          >
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={() => alert("Assignment Saved!")}>
+            Save
+          </Button>
+        </Link>
       </div>
     </div>
   );
