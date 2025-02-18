@@ -3,7 +3,7 @@ import AddingAndRemovingToFromArrays from "./AddingAndRemovingToFromArrays";
 import ArrayIndexAndLength from "./ArrayIndexAndLength";
 import ArrowFunctions from "./ArrowFunctions";
 import BooleanVariables from "./BooleanVariables";
-import Classes from "./classes";
+import Classes from "./Classes";
 import ConditionalOutputIfElse from "./ConditionalOutputIfElse";
 import ConditionalOutputInline from "./ConditionalOutputInline";
 import Destructing from "./Destructing";

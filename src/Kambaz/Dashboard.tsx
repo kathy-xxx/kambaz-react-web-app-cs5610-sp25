@@ -10,9 +10,7 @@ export default function Dashboard() {
       style={{ marginLeft: "120px" }}
     >
       <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
-      <h2 id="wd-dashboard-published">
-        Published Courses ({courses.length})
-      </h2>{" "}
+      <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2>
       <hr />
       <div id="wd-dashboard-courses">
         <Row xs={1} sm={2} md={4} className="g-4">
