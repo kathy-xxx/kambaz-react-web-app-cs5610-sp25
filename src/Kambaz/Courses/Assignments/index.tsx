@@ -67,7 +67,7 @@ export default function Assignments() {
                       <AiOutlineForm className="text-success me-2" />
                       <div className="wd-assigment">
                         <Link
-                          to="/Kambaz/Courses/1234/Assignments/1"
+                          to={`/Kambaz/Courses/${cid}/Assignments/${assignment._id}`}
                           className="text-decoration-none text-dark fw-bold me-2"
                         >
                           {assignment.title}
