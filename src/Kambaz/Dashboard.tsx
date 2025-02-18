@@ -18,7 +18,7 @@ export default function Dashboard() {
             <Col className="wd-dashboard-course" style={{ width: "250px" }}>
               <Card>
                 <Link
-                  to="{`/Kambaz/Courses/${course._id}/Home`"
+                  to={`/Kambaz/Courses/${course._id}/Home`}
                   className="wd-dashboard-course-link text-decoration-none text-dark"
                 >
                   <Card.Img
