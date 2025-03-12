@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import CounterRedux from "./CounterRedux";
 import AddRedux from "./AddRedux";
+import TodoList from "./todos/TodoList";
 export default function HelloRedux() {
   const { message } = useSelector((state: any) => state.helloReducer);
   return (
@@ -9,6 +10,7 @@ export default function HelloRedux() {
       <h4>{message}</h4> <hr />
       <CounterRedux />
       <AddRedux />
+      <TodoList />
     </div>
   );
 }
