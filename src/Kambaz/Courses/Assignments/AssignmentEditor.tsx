@@ -1,18 +1,54 @@
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { Link, useParams } from "react-router";
-import * as db from "../../Database";
+import { useSelector, useDispatch } from "react-redux";
+import { addAssignment, updateAssignment } from "./reducer";
+import { useState } from "react";
 export default function AssignmentEditor() {
   const { cid, aid } = useParams();
-  const assignments = db.assignments;
-  const assignment = assignments.find(
-    (assignment) => assignment.course === cid && assignment._id === aid
+  const { assignments } = useSelector((state: any) => state.assignmentsReducer);
+  const dispatch = useDispatch();
+
+  const isNew = aid === "new";
+  const existingAssignment = assignments.find(
+    (assignment: any) => assignment.course === cid && assignment._id === aid
   );
+  const [assignment, setAssignment] = useState(
+    isNew
+      ? {
+          title: "",
+          course: cid,
+          modules: "",
+          available_from_date: new Date().toISOString(),
+          available_until_date: new Date(
+            new Date().setDate(new Date().getDate() + 14)
+          ).toISOString(),
+          points: 100,
+        }
+      : existingAssignment || {}
+  );
+  const handleSave = () => {
+    if (isNew) {
+      dispatch(addAssignment(assignment));
+    } else {
+      dispatch(updateAssignment(assignment));
+    }
+  };
+  const formatDateForInput = (isoString: string | undefined) => {
+    if (!isoString) return "";
+    return new Date(isoString).toISOString().slice(0, 16);
+  };
+  const handleDateChange = (field: string, value: string) => {
+    setAssignment({ ...assignment, [field]: new Date(value).toISOString() });
+  };
   return (
     <div id="wd-assignments-editor" className="p-4">
       <Form.Group className="mb-3" controlId="wd-name">
         <Form.Label>Assignment Name</Form.Label>
         <Form.Control
-          defaultValue={assignment && assignment.title}
+          value={assignment.title}
+          onChange={(e) =>
+            setAssignment({ ...assignment, title: e.target.value })
+          }
           placeholder="Enter assignment name"
         />
       </Form.Group>
@@ -20,22 +56,22 @@ export default function AssignmentEditor() {
         <Form.Control
           as="textarea"
           rows={5}
-          defaultValue={`The assignment is available online.
-
-Submit a link to the landing page of your Web application running on Netlify.
-
-The landing page should include the following:
-- Your full name and section
-- Links to each of the lab assignments
-- Link to the Kanbas application
-- Links to all relevant source code repositories
-
-The Kanbas application should include a link to navigate back to the landing page.`}
+          value={assignment.description}
+          onChange={(e) =>
+            setAssignment({ ...assignment, description: e.target.value })
+          }
+          placeholder="Enter assignment description"
         />
       </Form.Group>
       <Form.Group className="mb-3" controlId="wd-points">
         <Form.Label>Points</Form.Label>
-        <Form.Control type="number" defaultValue={100} />
+        <Form.Control
+          type="number"
+          value={assignment.points}
+          onChange={(e) =>
+            setAssignment({ ...assignment, points: Number(e.target.value) })
+          }
+        />
       </Form.Group>
       <Form.Group className="mb-3" controlId="wd-group">
         <Form.Label>Assignment Group</Form.Label>
@@ -89,20 +125,14 @@ The Kanbas application should include a link to navigate back to the landing pag
       </Form.Group>
       <Row>
         <Col>
-          <Form.Group className="mb-3" controlId="wd-due-date">
-            <Form.Label>Due</Form.Label>
-            <Form.Control
-              type="datetime-local"
-              defaultValue="2024-05-13T23:59"
-            />
-          </Form.Group>
-        </Col>
-        <Col>
           <Form.Group className="mb-3" controlId="wd-available-from">
             <Form.Label>Available from</Form.Label>
             <Form.Control
               type="datetime-local"
-              defaultValue="2024-05-06T00:00"
+              value={formatDateForInput(assignment.available_from_date)}
+              onChange={(e) =>
+                handleDateChange("available_from_date", e.target.value)
+              }
             />
           </Form.Group>
         </Col>
@@ -111,7 +141,10 @@ The Kanbas application should include a link to navigate back to the landing pag
             <Form.Label>Until</Form.Label>
             <Form.Control
               type="datetime-local"
-              defaultValue="2024-05-20T00:00"
+              value={formatDateForInput(assignment.available_until_date)}
+              onChange={(e) =>
+                handleDateChange("available_until_date", e.target.value)
+              }
             />
           </Form.Group>
         </Col>
@@ -128,7 +161,7 @@ The Kanbas application should include a link to navigate back to the landing pag
           >
             Cancel
           </Button>
-          <Button variant="danger" onClick={() => alert("Assignment Saved!")}>
+          <Button variant="danger" onClick={handleSave}>
             Save
           </Button>
         </Link>

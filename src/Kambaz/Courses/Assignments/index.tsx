@@ -1,46 +1,32 @@
-import { Button, FormControl, InputGroup, ListGroup } from "react-bootstrap";
+import { ListGroup } from "react-bootstrap";
+import AssignmentsControls from "./AssignmentsControls";
 import AssignmentControlButtons from "./AssignmentControlButtons";
 import AssignmentsControlButtons from "./AssignmentsControlButtons";
-import { FaSearch } from "react-icons/fa";
-import { BsGripVertical, BsPlus } from "react-icons/bs";
+import { BsGripVertical } from "react-icons/bs";
 import { AiOutlineForm } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router";
-import * as db from "../../Database";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteAssignment } from "./reducer";
+const formatDate = (isoString: string) => {
+  const date = new Date(isoString);
+  return date.toLocaleString("en-US", {
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  });
+};
 export default function Assignments() {
   const { cid } = useParams();
-  const assignments = db.assignments;
+  const dispatch = useDispatch();
+  const { assignments } = useSelector((state: any) => state.assignmentsReducer);
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const isFaculty = currentUser.role === "FACULTY";
   return (
     <div id="wd-assignments">
-      <div className="d-flex justify-content-between align-items-center mb-3">
-        <InputGroup style={{ maxWidth: "300px" }}>
-          <InputGroup.Text className="bg-light border-secondary">
-            <FaSearch />
-          </InputGroup.Text>
-          <FormControl
-            placeholder="Search..."
-            aria-label="Search for Assignments"
-            id="wd-search-assignment"
-            className="border-secondary"
-          />
-        </InputGroup>
-        <div className="d-flex justify-content-between align-items-center mb-3">
-          <Button
-            variant="outline-secondary"
-            className="me-2 d-flex align-items-center px-3"
-            id="wd-add-assignment-group"
-          >
-            <BsPlus className="position-relative me-2" /> Group
-          </Button>
-          <Button
-            variant="danger"
-            className="d-flex align-items-center px-3"
-            id="wd-add-assignment"
-          >
-            <BsPlus className="position-relative me-2" /> Assignment
-          </Button>
-        </div>
-      </div>
+      <AssignmentsControls isFaculty={isFaculty} />
       <ListGroup className="rounded-0" id="wd-assignments">
         <ListGroup.Item className="wd-assignment p-0 mb-5 fs-5 border-gray">
           <div className="wd-assignments-title p-3 ps-2 bg-secondary d-flex justify-content-between align-items-center">
@@ -65,19 +51,36 @@ export default function Assignments() {
                       <BsGripVertical className="me-2" />
                       <AiOutlineForm className="text-success me-2" />
                       <div className="wd-assigment">
-                        <Link
-                          to={`/Kambaz/Courses/${cid}/Assignments/${assignment._id}`}
-                          className="text-decoration-none text-dark fw-bold me-2"
-                        >
-                          {assignment.title}
-                        </Link>
+                        {isFaculty ? (
+                          <Link
+                            to={`/Kambaz/Courses/${cid}/Assignments/${assignment._id}`}
+                            className="text-decoration-none text-dark fw-bold me-2"
+                          >
+                            {assignment.title}
+                          </Link>
+                        ) : (
+                          <span className="text-dark fw-bold me-2">
+                            {assignment.title}
+                          </span>
+                        )}
                         <br />
-                        <span className="text-danger">Multiple Modules</span> |
-                        <b>Not available until</b> May 6 at 12am | <b>Due</b>{" "}
-                        May 30 at 11:59pm | 100 pts
+                        <span className="text-danger">
+                          {assignment.modules}
+                        </span>{" "}
+                        |<b> Not available until </b>{" "}
+                        {formatDate(assignment.available_from_date)} |
+                        <b> Due </b>{" "}
+                        {formatDate(assignment.available_until_date)} |
+                        {assignment.points} pts
                       </div>
                     </div>
-                    <AssignmentControlButtons />
+                    <AssignmentControlButtons
+                      assignmentId={assignment._id}
+                      deleteAssignment={(assignmentId) => {
+                        dispatch(deleteAssignment(assignmentId));
+                      }}
+                      isFaculty={isFaculty}
+                    />
                   </div>
                 </ListGroup.Item>
               ))}
