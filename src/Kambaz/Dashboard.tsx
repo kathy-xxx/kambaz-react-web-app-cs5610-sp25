@@ -1,6 +1,6 @@
 import { Button, Card, Col, FormControl, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import * as db from "./Database";
 export default function Dashboard({
   courses,
@@ -49,12 +49,14 @@ export default function Dashboard({
           <br />
           <FormControl
             value={course.name}
+            placeholder="Course Name"
             className="mb-2"
             onChange={(e) => setCourse({ ...course, name: e.target.value })}
           />
           <FormControl
             as="textarea"
             value={course.description}
+            placeholder="Course Description"
             rows={3}
             onChange={(e) =>
               setCourse({ ...course, description: e.target.value })
