@@ -24,11 +24,11 @@ const coursesSlice = createSlice({
     },
     deleteCourse: (state, { payload: courseId }) => {
       state.courses = state.courses.filter(
-        (m: any) => m._id !== courseId);
+        (c: any) => c._id !== courseId);
     },
     updateCourse: (state, { payload: course }) => {
-      state.courses = state.courses.map((m: any) =>
-        m._id === course._id ? course : m
+      state.courses = state.courses.map((c: any) =>
+        c._id === course._id ? course : c
       ) as any;
     },
   },
