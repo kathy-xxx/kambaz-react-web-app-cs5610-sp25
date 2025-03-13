@@ -23,9 +23,11 @@ export default function Dashboard({
   const dispatch = useDispatch();
   const isFaculty = currentUser.role === "FACULTY";
   const [showAllCourses, setShowAllCourses] = useState(false);
-  const userEnrollments = enrollments.filter((e) => e.user === currentUser._id);
+  const userEnrollments = enrollments.filter(
+    (e: any) => e.user === currentUser._id
+  );
   const isEnrolled = (courseId: string) =>
-    userEnrollments.some((e) => e.course === courseId);
+    userEnrollments.some((e: any) => e.course === courseId);
   return (
     <div
       id="wd-dashboard"

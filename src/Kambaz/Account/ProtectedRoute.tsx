@@ -19,7 +19,7 @@ export default function ProtectedRoute({ children }: { children: any }) {
   }
 
   const isEnrolled = enrollments?.some(
-    (e) => e.user === currentUser._id && e.course === cid
+    (e: any) => e.user === currentUser._id && e.course === cid
   );
 
   if (!isEnrolled) {
