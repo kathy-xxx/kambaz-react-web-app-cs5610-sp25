@@ -124,35 +124,36 @@ export default function Dashboard({
                     >
                       <Button variant="primary">Go</Button>
                     </Link>
-                    {!isFaculty && isEnrolled(course._id) ? (
-                      <Button
-                        variant="danger"
-                        onClick={() =>
-                          dispatch(
-                            deleteEnrollment({
-                              user: currentUser._id,
-                              course: course._id,
-                            })
-                          )
-                        }
-                      >
-                        Unenroll
-                      </Button>
-                    ) : (
-                      <Button
-                        variant="success"
-                        onClick={() =>
-                          dispatch(
-                            addEnrollment({
-                              user: currentUser._id,
-                              course: course._id,
-                            })
-                          )
-                        }
-                      >
-                        Enroll
-                      </Button>
-                    )}
+                    {!isFaculty &&
+                      (isEnrolled(course._id) ? (
+                        <Button
+                          variant="danger"
+                          onClick={() =>
+                            dispatch(
+                              deleteEnrollment({
+                                user: currentUser._id,
+                                course: course._id,
+                              })
+                            )
+                          }
+                        >
+                          Unenroll
+                        </Button>
+                      ) : (
+                        <Button
+                          variant="success"
+                          onClick={() =>
+                            dispatch(
+                              addEnrollment({
+                                user: currentUser._id,
+                                course: course._id,
+                              })
+                            )
+                          }
+                        >
+                          Enroll
+                        </Button>
+                      ))}
                     {isFaculty && (
                       <>
                         <button
