@@ -1,8 +1,6 @@
 import { Button, Card, Col, FormControl, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { addEnrollment, deleteEnrollment } from "./Enrollments/reducer";
-import { useState } from "react";
+import { useSelector } from "react-redux";
 export default function Dashboard({
   courses,
   course,
@@ -19,15 +17,7 @@ export default function Dashboard({
   updateCourse: () => void;
 }) {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
-  const { enrollments } = useSelector((state: any) => state.enrollmentsReducer);
-  const dispatch = useDispatch();
   const isFaculty = currentUser.role === "FACULTY";
-  const [showAllCourses, setShowAllCourses] = useState(false);
-  const userEnrollments = enrollments.filter(
-    (e: any) => e.user === currentUser._id
-  );
-  const isEnrolled = (courseId: string) =>
-    userEnrollments.some((e: any) => e.course === courseId);
   return (
     <div
       id="wd-dashboard"
@@ -35,22 +25,6 @@ export default function Dashboard({
       style={{ marginLeft: "120px" }}
     >
       <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
-      {!isFaculty && (
-        <>
-          <h2 id="wd-dashboard-published">
-            {showAllCourses
-              ? `Published Courses (${courses.length})`
-              : `Enrolled Courses (${userEnrollments.length})`}
-            <Button
-              className="btn btn-primary float-end"
-              onClick={() => setShowAllCourses(!showAllCourses)}
-            >
-              {showAllCourses ? "Show Enrolled Courses" : "Enrollments"}
-            </Button>
-          </h2>
-          <hr />
-        </>
-      )}
       {isFaculty && (
         <>
           <div>
@@ -79,6 +53,12 @@ export default function Dashboard({
               onChange={(e) => setCourse({ ...course, name: e.target.value })}
             />
             <FormControl
+              value={course.number}
+              placeholder="Course Number"
+              className="mb-2"
+              onChange={(e) => setCourse({ ...course, number: e.target.value })}
+            />
+            <FormControl
               as="textarea"
               value={course.description}
               placeholder="Course Description"
@@ -98,7 +78,6 @@ export default function Dashboard({
       <div id="wd-dashboard-courses">
         <Row xs={1} sm={2} md={4} className="g-4">
           {courses
-            .filter((course) => showAllCourses || isEnrolled(course._id))
             .map((course) => (
               <Col className="wd-dashboard-course" style={{ width: "250px" }}>
                 <Card>
@@ -124,36 +103,6 @@ export default function Dashboard({
                     >
                       <Button variant="primary">Go</Button>
                     </Link>
-                    {!isFaculty &&
-                      (isEnrolled(course._id) ? (
-                        <Button
-                          variant="danger"
-                          onClick={() =>
-                            dispatch(
-                              deleteEnrollment({
-                                user: currentUser._id,
-                                course: course._id,
-                              })
-                            )
-                          }
-                        >
-                          Unenroll
-                        </Button>
-                      ) : (
-                        <Button
-                          variant="success"
-                          onClick={() =>
-                            dispatch(
-                              addEnrollment({
-                                user: currentUser._id,
-                                course: course._id,
-                              })
-                            )
-                          }
-                        >
-                          Enroll
-                        </Button>
-                      ))}
                     {isFaculty && (
                       <>
                         <button
