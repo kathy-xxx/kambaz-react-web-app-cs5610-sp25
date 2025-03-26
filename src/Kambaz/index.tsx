@@ -4,15 +4,14 @@ import KambazNavigation from "./Navigation";
 import Courses from "./Courses";
 import { Routes, Route, Navigate } from "react-router";
 import { useEffect, useState } from "react";
-import { addCourse, deleteCourse, updateCourse } from "./Courses/reducer";
+// import { addCourse, deleteCourse, updateCourse } from "./Courses/reducer";
 import "./styles.css";
 import ProtectedRoute from "./Account/ProtectedRoute";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Session from "./Account/Session";
 import * as userClient from "./Account/client";
 import * as courseClient from "./Courses/client";
 export default function Kambaz() {
-  const dispatch = useDispatch();
   const [course, setCourse] = useState<any>({
     _id: "1234",
     name: "New Course",
@@ -39,7 +38,7 @@ export default function Kambaz() {
     setCourses([...courses, newCourse]);
   };
   const deleteCourse = async (courseId: string) => {
-    const status = await courseClient.deleteCourse(courseId);
+    await courseClient.deleteCourse(courseId);
     setCourses(courses.filter((course) => course._id !== courseId));
   };
   const updateCourse = async () => {
