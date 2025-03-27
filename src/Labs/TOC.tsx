@@ -65,7 +65,23 @@ export default function TOC() {
           id="wd-github"
           href="https://github.com/kathy-xxx/kambaz-react-web-app-cs5610-sp25.git"
         >
-          My GitHub
+          My GitHub for React Web App
+        </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link
+          id="wd-github"
+          href="https://kambaz-node-server-app-zixuan.onrender.com/"
+        >
+          Root of the Render Server
+        </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link
+          id="wd-github"
+          href="https://github.com/kathy-xxx/kambaz-node-server-app.git"
+        >
+          My GitHub for Node Server App
         </Nav.Link>
       </Nav.Item>
     </Nav>
