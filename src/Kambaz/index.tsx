@@ -10,7 +10,7 @@ import ProtectedRoute from "./Account/ProtectedRoute";
 import { useSelector } from "react-redux";
 import Session from "./Account/Session";
 import * as userClient from "./Account/client";
-import * as coursesClient from "./Courses/client";
+import * as courseClient from "./Courses/client";
 export default function Kambaz() {
   const [course, setCourse] = useState<any>({
     _id: "1234",
@@ -24,7 +24,7 @@ export default function Kambaz() {
   const [courses, setCourses] = useState<any[]>([]);
   const fetchCourses = async () => {
     try {
-      const courses = await coursesClient.fetchAllCourses();
+      const courses = await courseClient.fetchAllCourses();
       // const courses = await userClient.findMyCourses();
       setCourses(courses);
       console.log(courses);
