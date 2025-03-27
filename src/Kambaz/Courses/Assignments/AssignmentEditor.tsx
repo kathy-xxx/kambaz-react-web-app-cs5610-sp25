@@ -1,5 +1,5 @@
 import { Form, Button, Row, Col } from "react-bootstrap";
-import { Link, useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { addAssignment, updateAssignment } from "./reducer";
 import { useState } from "react";
@@ -33,14 +33,22 @@ export default function AssignmentEditor() {
     if (!cid) return;
     try {
       if (isNew) {
-        console.log("Updating assignment with _id:", assignment._id, assignment);
+        console.log(
+          "Updating assignment with _id:",
+          assignment._id,
+          assignment
+        );
         const savedAssignment = await courseClient.createAssignmentForCourse(
           cid,
           assignment
         );
         dispatch(addAssignment(savedAssignment));
       } else {
-        console.log("Updating assignment with _id:", assignment._id, assignment);
+        console.log(
+          "Updating assignment with _id:",
+          assignment._id,
+          assignment
+        );
         const updatedAssignment = await assignmentClient.updateAssignment(
           assignment
         );
