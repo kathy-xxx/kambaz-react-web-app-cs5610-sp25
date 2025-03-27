@@ -67,7 +67,9 @@ export default function Assignments() {
                     <AiOutlineForm
                       className="text-success me-2"
                       onClick={() =>
-                        navigate(`/Kambaz/Courses/${cid}/Assignments/${assignment._id}`)
+                        navigate(
+                          `/Kambaz/Courses/${cid}/Assignments/${assignment._id}`
+                        )
                       }
                     />
                     <div className="wd-assigment">
