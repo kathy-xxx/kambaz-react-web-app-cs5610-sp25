@@ -1,9 +1,12 @@
 import { Form, Button, Row, Col } from "react-bootstrap";
-import { Link, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { addAssignment, updateAssignment } from "./reducer";
 import { useState } from "react";
+import * as courseClient from "../client";
+import * as assignmentClient from "./client";
 export default function AssignmentEditor() {
+  const navigate = useNavigate();
   const { cid, aid } = useParams();
   const { assignments } = useSelector((state: any) => state.assignmentsReducer);
   const dispatch = useDispatch();
@@ -26,11 +29,26 @@ export default function AssignmentEditor() {
         }
       : existingAssignment || {}
   );
-  const handleSave = () => {
-    if (isNew) {
-      dispatch(addAssignment(assignment));
-    } else {
-      dispatch(updateAssignment(assignment));
+  const handleSave = async () => {
+    if (!cid) return;
+    try {
+      if (isNew) {
+        console.log("Updating assignment with _id:", assignment._id, assignment);
+        const savedAssignment = await courseClient.createAssignmentForCourse(
+          cid,
+          assignment
+        );
+        dispatch(addAssignment(savedAssignment));
+      } else {
+        console.log("Updating assignment with _id:", assignment._id, assignment);
+        const updatedAssignment = await assignmentClient.updateAssignment(
+          assignment
+        );
+        dispatch(updateAssignment(updatedAssignment));
+      }
+      navigate(`/Kambaz/Courses/${cid}/Assignments`);
+    } catch (error) {
+      console.error("Error saving assignment:", error);
     }
   };
   const formatDateForInput = (isoString: string | undefined) => {
@@ -150,21 +168,16 @@ export default function AssignmentEditor() {
         </Col>
       </Row>
       <div className="d-flex justify-content-end">
-        <Link
-          to={`/Kambaz/Courses/${cid}/Assignments`}
-          className="wd-dashboard-course-link text-decoration-none text-dark"
+        <Button
+          variant="secondary"
+          className="me-2"
+          onClick={() => navigate(`/Kambaz/Courses/${cid}/Assignments`)}
         >
-          <Button
-            variant="secondary"
-            className="me-2"
-            onClick={() => alert("Assignment Cancelled!")}
-          >
-            Cancel
-          </Button>
-          <Button variant="danger" onClick={handleSave}>
-            Save
-          </Button>
-        </Link>
+          Cancel
+        </Button>
+        <Button variant="danger" onClick={handleSave}>
+          Save
+        </Button>
       </div>
     </div>
   );

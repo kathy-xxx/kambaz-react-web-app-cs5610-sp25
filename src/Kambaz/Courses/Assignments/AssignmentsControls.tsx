@@ -40,11 +40,7 @@ export default function AssignmentsControls({
             variant="danger"
             className="d-flex align-items-center px-3"
             id="wd-add-assignment"
-            onClick={() =>
-              navigate(
-                `/Kambaz/Courses/${cid}/Assignments/new`
-              )
-            }
+             v
           >
             <BsPlus className="position-relative me-2" /> Assignment
           </Button>
