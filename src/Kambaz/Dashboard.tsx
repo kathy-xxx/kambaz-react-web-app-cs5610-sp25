@@ -17,7 +17,7 @@ export default function Dashboard({
   updateCourse: () => void;
 }) {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
-  const isFaculty = currentUser.role === "FACULTY";
+  const isFaculty = currentUser && currentUser.role === "FACULTY";
   return (
     <div
       id="wd-dashboard"

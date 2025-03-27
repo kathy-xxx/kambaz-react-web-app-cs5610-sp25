@@ -26,6 +26,7 @@ export default function Kambaz() {
     try {
       const courses = await userClient.findMyCourses();
       setCourses(courses);
+      console.log(courses);
     } catch (error) {
       console.error(error);
     }
@@ -35,7 +36,7 @@ export default function Kambaz() {
   }, [currentUser]);
   const addCourse = async () => {
     const newCourse = await userClient.createCourse(course);
-    setCourses([...courses, newCourse]);
+    setCourses([...courses, { ...course, newCourse }]);
   };
   const deleteCourse = async (courseId: string) => {
     await courseClient.deleteCourse(courseId);
