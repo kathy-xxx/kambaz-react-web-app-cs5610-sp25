@@ -77,60 +77,59 @@ export default function Dashboard({
       )}
       <div id="wd-dashboard-courses">
         <Row xs={1} sm={2} md={4} className="g-4">
-          {courses
-            .map((course) => (
-              <Col className="wd-dashboard-course" style={{ width: "250px" }}>
-                <Card>
-                  <Card.Img
-                    variant="top"
-                    src="/images/reactjs.jpg"
-                    width="100%"
-                    height={160}
-                  />
-                  <Card.Body>
-                    <Card.Title className="wd-dashboard-course-title text-nowrap overflow-hidden">
-                      {course.name}
-                    </Card.Title>
-                    <Card.Text
-                      className="wd-dashboard-course-description overflow-hidden"
-                      style={{ height: "100px" }}
-                    >
-                      {course.description}
-                    </Card.Text>
-                    <Link
-                      to={`/Kambaz/Courses/${course._id}/Home`}
-                      className="wd-dashboard-course-link text-decoration-none text-dark"
-                    >
-                      <Button variant="primary">Go</Button>
-                    </Link>
-                    {isFaculty && (
-                      <>
-                        <button
-                          onClick={(event) => {
-                            event.preventDefault();
-                            deleteCourse(course._id);
-                          }}
-                          className="btn btn-danger float-end"
-                          id="wd-delete-course-click"
-                        >
-                          Delete
-                        </button>
-                        <button
-                          id="wd-edit-course-click"
-                          onClick={(event) => {
-                            event.preventDefault();
-                            setCourse(course);
-                          }}
-                          className="btn btn-warning me-2 float-end"
-                        >
-                          Edit
-                        </button>
-                      </>
-                    )}
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
+          {courses.map((course) => (
+            <Col className="wd-dashboard-course" style={{ width: "250px" }}>
+              <Card>
+                <Card.Img
+                  variant="top"
+                  src="/images/reactjs.jpg"
+                  width="100%"
+                  height={160}
+                />
+                <Card.Body>
+                  <Card.Title className="wd-dashboard-course-title text-nowrap overflow-hidden">
+                    {course.name}
+                  </Card.Title>
+                  <Card.Text
+                    className="wd-dashboard-course-description overflow-hidden"
+                    style={{ height: "100px" }}
+                  >
+                    {course.description}
+                  </Card.Text>
+                  <Link
+                    to={`/Kambaz/Courses/${course._id}/Home`}
+                    className="wd-dashboard-course-link text-decoration-none text-dark"
+                  >
+                    <Button variant="primary">Go</Button>
+                  </Link>
+                  {isFaculty && (
+                    <>
+                      <button
+                        onClick={(event) => {
+                          event.preventDefault();
+                          deleteCourse(course._id);
+                        }}
+                        className="btn btn-danger float-end"
+                        id="wd-delete-course-click"
+                      >
+                        Delete
+                      </button>
+                      <button
+                        id="wd-edit-course-click"
+                        onClick={(event) => {
+                          event.preventDefault();
+                          setCourse(course);
+                        }}
+                        className="btn btn-warning me-2 float-end"
+                      >
+                        Edit
+                      </button>
+                    </>
+                  )}
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
         </Row>
       </div>
     </div>
