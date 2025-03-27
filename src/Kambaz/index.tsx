@@ -65,7 +65,7 @@ export default function Kambaz() {
             <Route
               path="/Dashboard"
               element={
-                // <ProtectedRoute>
+                <ProtectedRoute>
                   <Dashboard
                     courses={courses}
                     course={course}
@@ -74,7 +74,7 @@ export default function Kambaz() {
                     deleteCourse={deleteCourse}
                     updateCourse={updateCourse}
                   />
-                //</ProtectedRoute>
+                </ProtectedRoute>
               }
             />
             <Route
