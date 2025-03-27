@@ -4,14 +4,15 @@ import KambazNavigation from "./Navigation";
 import Courses from "./Courses";
 import { Routes, Route, Navigate } from "react-router";
 import { useEffect, useState } from "react";
-// import { addCourse, deleteCourse, updateCourse } from "./Courses/reducer";
 import "./styles.css";
 import ProtectedRoute from "./Account/ProtectedRoute";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Session from "./Account/Session";
 import * as userClient from "./Account/client";
 import * as courseClient from "./Courses/client";
+import { setCourses } from "./Courses/reducer";
 export default function Kambaz() {
+  const dispatch = useDispatch();
   const [course, setCourse] = useState<any>({
     _id: "1234",
     name: "New Course",
@@ -20,13 +21,11 @@ export default function Kambaz() {
     endDate: "2023-12-15",
     description: "New Description",
   });
-  const { currentUser } = useSelector((state: any) => state.accountReducer);
-  const [courses, setCourses] = useState<any[]>([]);
+  const { courses } = useSelector((state: any) => state.coursesReducer);
   const fetchCourses = async () => {
     try {
       const courses = await courseClient.fetchAllCourses();
-      // const courses = await userClient.findMyCourses();
-      setCourses(courses);
+      dispatch(setCourses(courses));
       console.log(courses);
     } catch (error) {
       console.error(error);
@@ -34,14 +33,14 @@ export default function Kambaz() {
   };
   useEffect(() => {
     fetchCourses();
-  }, [currentUser]);
+  }, []);
   const addCourse = async () => {
     const newCourse = await userClient.createCourse(course);
     setCourses([...courses, { ...course, newCourse }]);
   };
   const deleteCourse = async (courseId: string) => {
     await courseClient.deleteCourse(courseId);
-    setCourses(courses.filter((course) => course._id !== courseId));
+    setCourses(courses.filter((course: any) => course._id !== courseId));
   };
   const updateCourse = async () => {
     await courseClient.updateCourse(course);

@@ -1,10 +1,31 @@
 import { Table } from "react-bootstrap";
 import { FaUserCircle } from "react-icons/fa";
 import { useParams } from "react-router-dom";
-import * as db from "../../Database";
+import { useDispatch, useSelector } from "react-redux";
+import * as enrollmentsClient from "../../Enrollments/client";
+import * as accountClient from "../../Account/client";
+import { setEnrollments } from "../../Enrollments/reducer";
+import { setPeople } from "./reducer";
+import { useEffect } from "react";
 export default function PeopleTable() {
   const { cid } = useParams();
-  const { users, enrollments } = db;
+  const { people } = useSelector((state: any) => state.peopleReducer);
+  const fetchPeople = async () => {
+    const people = await accountClient.findAllUsers();
+    dispatch(setPeople(people));
+  };
+  useEffect(() => {
+    fetchPeople();
+  }, []);
+  const { enrollments } = useSelector((state: any) => state.enrollmentsReducer);
+  const dispatch = useDispatch();
+  const fetchEnrollments = async () => {
+    const enrollments = await enrollmentsClient.getEnrollments();
+    dispatch(setEnrollments(enrollments));
+  };
+  useEffect(() => {
+    fetchEnrollments();
+  }, []);
   return (
     <div id="wd-people-table">
       <Table striped>
@@ -19,7 +40,7 @@ export default function PeopleTable() {
           </tr>
         </thead>
         <tbody>
-          {users
+          {people
             .filter((user: any) =>
               enrollments.some(
                 (enrollment: any) =>
