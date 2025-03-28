@@ -28,18 +28,20 @@ export default function Modules() {
   };
   useEffect(() => {
     fetchModules();
-  }, []);
-  const createModuleForCourse = async () => {
-    if (!cid) return;
-    const newModule = { name: moduleName, course: cid };
-    const module = await coursesClient.createModuleForCourse(cid, newModule);
-    dispatch(addModule(module));
+  }, [cid]);
+  const addModuleHandler = async () => {
+    const newModule = await coursesClient.createModuleForCourse(cid!, {
+      name: moduleName,
+      course: cid,
+    });
+    dispatch(addModule(newModule));
+    setModuleName("");
   };
-  const removeModule = async (moduleId: string) => {
+  const deleteModuleHandler = async (moduleId: string) => {
     await modulesClient.deleteModule(moduleId);
     dispatch(deleteModule(moduleId));
   };
-  const saveModule = async (module: any) => {
+  const updateModuleHandler = async (module: any) => {
     await modulesClient.updateModule(module);
     dispatch(updateModule(module));
   };
@@ -49,7 +51,7 @@ export default function Modules() {
         <ModulesControls
           setModuleName={setModuleName}
           moduleName={moduleName}
-          addModule={createModuleForCourse}
+          addModule={addModuleHandler}
           isFaculty={isFaculty}
         />
         <br />
@@ -66,13 +68,11 @@ export default function Modules() {
                   <FormControl
                     className="w-50 d-inline-block"
                     onChange={(e) =>
-                      dispatch(
-                        updateModule({ ...module, name: e.target.value })
-                      )
+                      updateModuleHandler({ ...module, name: e.target.value })
                     }
                     onKeyDown={(e) => {
                       if (e.key === "Enter") {
-                        saveModule({ ...module, editing: false });
+                        updateModuleHandler({ ...module, editing: false });
                       }
                     }}
                     defaultValue={module.name}
@@ -80,7 +80,7 @@ export default function Modules() {
                 )}
                 <ModuleControlButtons
                   moduleId={module._id}
-                  deleteModule={(moduleId) => removeModule(moduleId)}
+                  deleteModule={(moduleId) => deleteModuleHandler(moduleId)}
                   editModule={(moduleId) => dispatch(editModule(moduleId))}
                   isFaculty={isFaculty}
                 />
