@@ -8,7 +8,6 @@ import "./styles.css";
 import ProtectedRoute from "./Account/ProtectedRoute";
 import { useDispatch, useSelector } from "react-redux";
 import Session from "./Account/Session";
-import * as userClient from "./Account/client";
 import * as courseClient from "./Courses/client";
 import { setCourses } from "./Courses/reducer";
 export default function Kambaz() {
@@ -35,12 +34,16 @@ export default function Kambaz() {
     fetchCourses();
   }, []);
   const addCourse = async () => {
-    const newCourse = await userClient.createCourse(course);
-    setCourses([...courses, { ...course, newCourse }]);
+    const newCourse = await courseClient.createCourse(course);
+    dispatch(setCourses([...courses, newCourse]));
+    window.location.reload();
   };
   const deleteCourse = async (courseId: string) => {
     await courseClient.deleteCourse(courseId);
-    setCourses(courses.filter((course: any) => course._id !== courseId));
+    dispatch(
+      setCourses(courses.filter((course: any) => course._id !== courseId))
+    );
+    await fetchCourses();
   };
   const updateCourse = async () => {
     await courseClient.updateCourse(course);
