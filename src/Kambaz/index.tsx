@@ -12,14 +12,15 @@ import * as courseClient from "./Courses/client";
 import { setCourses } from "./Courses/reducer";
 export default function Kambaz() {
   const dispatch = useDispatch();
-  const [course, setCourse] = useState<any>({
+  const defaultCourse = {
     _id: "1234",
     name: "New Course",
     number: "New Number",
     startDate: "2023-09-10",
     endDate: "2023-12-15",
     description: "New Description",
-  });
+  };
+  const [course, setCourse] = useState(defaultCourse);
   const { courses } = useSelector((state: any) => state.coursesReducer);
   const fetchCourses = async () => {
     try {
@@ -37,6 +38,7 @@ export default function Kambaz() {
     const newCourse = await courseClient.createCourse(course);
     dispatch(setCourses([...courses, newCourse]));
     window.location.reload();
+    setCourse(defaultCourse);
   };
   const deleteCourse = async (courseId: string) => {
     await courseClient.deleteCourse(courseId);
@@ -47,15 +49,19 @@ export default function Kambaz() {
   };
   const updateCourse = async () => {
     await courseClient.updateCourse(course);
-    setCourses(
-      courses.map((c: any) => {
-        if (c._id === course._id) {
-          return course;
-        } else {
-          return c;
-        }
-      })
+    dispatch(
+      setCourses(
+        courses.map((c: any) => {
+          if (c._id === course._id) {
+            return course;
+          } else {
+            return c;
+          }
+        })
+      )
     );
+    await fetchCourses();
+    setCourse(defaultCourse);
   };
   return (
     <Session>
