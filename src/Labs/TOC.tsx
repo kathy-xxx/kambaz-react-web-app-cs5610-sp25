@@ -71,7 +71,7 @@ export default function TOC() {
       <Nav.Item>
         <Nav.Link
           id="wd-github"
-          href="https://kambaz-node-server-app-zixuan.onrender.com/"
+          href="https://a6-kambaz-node-server-app-zixuan.onrender.com/"
         >
           Root of the Render Server
         </Nav.Link>
