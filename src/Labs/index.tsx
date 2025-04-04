@@ -12,6 +12,7 @@ export default function Labs() {
     <Provider store={store}>
       <div className="container-fluid">
         <h1>Labs</h1>
+        <p>Please notice that it takes up to a minute for backend server to start up as it automatically spins down after periods of inactivity.</p>
         <TOC />
         <p>Created by: Zixuan Xiao</p>
         <Routes>
